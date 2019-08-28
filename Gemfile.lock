@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    rails-pwa (0.1.0)
-      rails (~> 6.0.0.rc1)
+    rails-pwa (0.1.2)
+      rails (~> 6.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -79,11 +79,11 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (0.9.2)
     mimemagic (0.3.3)
-    mini_mime (1.0.1)
+    mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    nio4r (2.3.1)
-    nokogiri (1.10.3)
+    nio4r (2.5.0)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -114,7 +114,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
-    rake (12.3.2)
+    rake (12.3.3)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -126,9 +126,9 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    websocket-driver (0.7.0)
+    websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.3)
+    websocket-extensions (0.1.4)
     zeitwerk (2.1.9)
 
 PLATFORMS
