@@ -1,8 +1,32 @@
-# Rails::Pwa
-Short description and motivation.
+# Rails::PWA
+A simple hack to serve service worker scripts from rails apps.
+
+*TLDR*: Serves the webpack defined at `app/javascripts/packs/worker.js` from `/worker.js`
+
+Service workers can only intercept requests in the directory and subdirectory they are served from. Rails serves webpacked javascript from paths similar to `/packs/js/application-abcd1234.js`. Any service worker served from a path like this would only be able to operate on paths under `/packs/js/`; generally not what you want.
+
+This gem lets you create a javascript pack for a service worker, and serve it from `/worker.js`.
 
 ## Usage
-How to use my plugin.
+Install the gem (see below)
+
+Add a service worker webpack by creating a file `app/javascripts/packs/worker.js`. Here's a very simple example to get started:
+
+```js
+for (const name of ["install", "activate", "fetch"]) {
+  self.addEventListener(name, event => console.log(event))
+}
+```
+
+You also need to register your worker, so add something like this to `app/javascripts/packs/application.js`:
+
+```
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/worker.js')
+  })
+}
+```
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -21,8 +45,12 @@ Or install it yourself as:
 $ gem install rails-pwa
 ```
 
-## Contributing
-Contribution directions go here.
+## How it works
+
+This gem installs a very simple piece of `Rack::Middleware` into your app, which intercepts all requests to `/worker.js` and either:
+
+* In development: Rewrites and forwards the request to the rails app (where the usual webpacker magic will occure)
+* In other environments: Serves the precompiled `worker.js` pack directly from `/public/packs/js/`. N.B. You may want to use some other form of url rewriting in production, depending on how your app is deployed.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
