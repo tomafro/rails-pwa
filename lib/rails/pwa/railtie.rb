@@ -10,7 +10,7 @@ class Rails::PWA::Railtie < ::Rails::Railtie
     scripts = app.config.pwa.scripts
     root    = Rails.env.development? ? false : Rails.public_path
 
-    app.config.app_middleware.use Rails::PWA::Interceptor,
+    app.config.middleware.insert_before Rack::Sendfile, Rails::PWA::Interceptor,
       scripts: app.config.pwa.scripts,
       root: root
   end
