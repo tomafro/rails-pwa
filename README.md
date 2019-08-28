@@ -1,7 +1,7 @@
 # Rails::PWA
 A simple hack to serve service worker scripts from rails apps.
 
-_TLDR_: Serves the webpack defined at `app/javascripts/packs/worker.js` from `/worker.js`
+**TLDR**: Serves the webpack defined at `app/javascript/packs/worker.js` from `/worker.js`
 
 Service workers can only intercept requests in the directory and subdirectory they are served from. Rails serves webpacked javascript from paths similar to `/packs/js/application-abcd1234.js`. Any service worker served from a path like this would only be able to operate on paths under `/packs/js/`; generally not what you want.
 
@@ -22,7 +22,7 @@ for (const name of ["install", "activate", "fetch"]) {
 
 You also need to register your worker, adding something like this to `app/javascript/packs/application.js`:
 
-```
+```js
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker.register("/worker.js")
